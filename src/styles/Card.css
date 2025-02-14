@@ -1,255 +1,225 @@
+/* Root variables for consistent sizing */
 :root {
-    --card-width-desktop: 600px;
-    --card-height-desktop: 800px;
-    --card-width-tablet: 500px;
-    --card-height-tablet: 700px;
-    --card-width-mobile: 320px;
-    --card-height-mobile: 480px;
-}
-
-.valentine-bg {
-    background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    --card-width-xl: 600px;
+    --card-height-xl: 800px;
+    --card-width-lg: 500px;
+    --card-height-lg: 700px;
+    --card-width-md: 400px;
+    --card-height-md: 600px;
+    --card-width-sm: 320px;
+    --card-height-sm: 480px;
+    --primary-color: #ff6b6b;
+    --secondary-color: #ff8e8e;
+  }
+  
+  /* Global Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Background Container */
+  .valentine-bg {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     min-height: 100vh;
-    padding: 1rem;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.valentine-card {
-    width: var(--card-width-desktop);
-    height: var(--card-height-desktop);
+    padding: clamp(10px, 3vw, 30px);
+    overflow: hidden;
+  }
+  
+  /* Card Container */
+  .valentine-card {
+    width: clamp(300px, 90vw, var(--card-width-xl));
+    height: clamp(450px, 80vh, var(--card-height-xl));
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 1s;
+    transition: transform 1s ease;
     cursor: pointer;
-    background: transparent;
-    border: none;
     margin: auto;
-}
-
-.valentine-card:hover,
-.valentine-card:active {
+  }
+  
+  .valentine-card.open {
     transform: rotateY(180deg);
-}
-
-.card-front,
-.card-inside {
+  }
+  
+  /* Card Faces */
+  .card-front,
+  .card-inside {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 30px;
+    border-radius: clamp(15px, 2vw, 30px);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
-
-.card-front {
+    padding: clamp(15px, 3vw, 30px);
     background: white;
+    overflow: hidden;
+  }
+  
+  .card-front {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-}
-
-.card-inside {
-    background: #fff9f9;
+    background: white;
+  }
+  
+  .card-inside {
     transform: rotateY(180deg);
+    background: #fff9f9;
     overflow-y: auto;
-    padding: 2rem;
-}
-
-.heart {
-    width: 150px;
-    height: 135px;
+  }
+  
+  /* Heart Animation */
+  .heart {
+    width: clamp(60px, 15vw, 150px);
+    height: clamp(54px, 13.5vw, 135px);
     position: relative;
-    margin: 2rem auto;
+    margin: clamp(10px, 3vw, 30px) auto;
     animation: heartbeat 1.5s infinite;
-}
-
-.heart:before,
-.heart:after {
+  }
+  
+  .heart:before,
+  .heart:after {
     content: "";
     position: absolute;
-    left: 75px;
+    left: 50%;
     top: 0;
-    width: 75px;
-    height: 120px;
-    background: #ff4444;
-    border-radius: 75px 75px 0 0;
+    width: 50%;
+    height: 80%;
+    background: var(--primary-color);
+    border-radius: 50px 50px 0 0;
     transform: rotate(-45deg);
     transform-origin: 0 100%;
-}
-
-.heart:after {
+  }
+  
+  .heart:after {
     left: 0;
     transform: rotate(45deg);
     transform-origin: 100% 100%;
-}
-
-@keyframes heartbeat {
+  }
+  
+  @keyframes heartbeat {
     0% { transform: scale(1); }
     50% { transform: scale(1.1); }
     100% { transform: scale(1); }
-}
-
-.card-content {
-    padding: 1.5rem;
-}
-
-.card-title {
-    font-size: 2.5rem;
-    color: #ff4444;
-    margin-bottom: 1.5rem;
-}
-
-.card-subtitle {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-.card-text {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    color: #444;
-}
-
-.signature {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2rem;
-    color: #ff4444;
-    margin-top: 2rem;
-}
-
-.front-text {
-    font-size: 2rem;
+  }
+  
+  /* Typography */
+  .card-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--primary-color);
+    margin-bottom: clamp(0.5rem, 2vw, 1.5rem);
     text-align: center;
-    margin-top: 1.5rem;
-    color: #ff4444;
-}
-
-/* Tablet Styles */
-@media screen and (max-width: 768px) {
+  }
+  
+  .card-subtitle {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    margin-bottom: clamp(0.5rem, 2vw, 1.5rem);
+    text-align: center;
+  }
+  
+  .card-text {
+    font-size: clamp(0.9rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
+    color: #444;
+  }
+  
+  .signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: var(--primary-color);
+    margin-top: clamp(1rem, 3vw, 2rem);
+    text-align: right;
+  }
+  
+  .front-text {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    text-align: center;
+    color: var(--primary-color);
+    margin-top: clamp(1rem, 3vw, 1.5rem);
+  }
+  
+  .flip-instruction {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    color: #666;
+    text-align: center;
+    margin-top: clamp(0.5rem, 2vw, 1rem);
+  }
+  
+  /* Scrollbar Styling */
+  .card-inside::-webkit-scrollbar {
+    width: clamp(4px, 1vw, 8px);
+  }
+  
+  .card-inside::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .card-inside::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 10px;
+  }
+  
+  /* Landscape Mode */
+  @media (orientation: landscape) and (max-height: 600px) {
     .valentine-card {
-        width: var(--card-width-tablet);
-        height: var(--card-height-tablet);
+      width: min(70vw, var(--card-width-lg));
+      height: 85vh;
     }
-
-    .card-title {
-        font-size: 2rem;
-    }
-
-    .card-subtitle {
-        font-size: 1.75rem;
-    }
-
-    .card-text {
-        font-size: 1.1rem;
-    }
-
-    .signature {
-        font-size: 1.75rem;
-    }
-
-    .heart {
-        width: 120px;
-        height: 108px;
-    }
-}
-
-/* Mobile Styles */
-@media screen and (max-width: 480px) {
+  }
+  
+  /* Touch Device Optimization */
+  @media (hover: none) {
     .valentine-card {
-        width: var(--card-width-mobile);
-        height: var(--card-height-mobile);
+      transition: transform 0.5s ease;
     }
-
+  }
+  
+  /* High DPI Screens */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .card-front,
     .card-inside {
-        border-radius: 20px;
-        padding: 1rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     }
-
-    .card-title {
-        font-size: 1.75rem;
+  }
+  
+  /* Safe Area for Notched Phones */
+  @supports (padding: max(0px)) {
+    .valentine-bg {
+      padding: max(20px, env(safe-area-inset-top))
+               max(20px, env(safe-area-inset-right))
+               max(20px, env(safe-area-inset-bottom))
+               max(20px, env(safe-area-inset-left));
     }
-
-    .card-subtitle {
-        font-size: 1.5rem;
+  }
+  
+  /* Print Styles */
+  @media print {
+    .valentine-card {
+      transform: none !important;
+      box-shadow: none !important;
     }
-
-    .card-text {
-        font-size: 1rem;
-        line-height: 1.4;
+    
+    .card-inside {
+      position: relative;
+      transform: none;
     }
-
-    .signature {
-        font-size: 1.5rem;
-        margin-top: 1.5rem;
+  }
+  
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .valentine-card {
+      transition: none;
     }
-
+    
     .heart {
-        width: 90px;
-        height: 81px;
-        margin: 1rem auto;
+      animation: none;
     }
-
-    .heart:before,
-    .heart:after {
-        left: 45px;
-        width: 45px;
-        height: 72px;
-    }
-}
-
-/* Touch device optimization */
-@media (hover: none) {
-    .valentine-card {
-        transition: transform 0.5s;
-    }
-    
-    .card-front {
-        position: relative;
-    }
-    
-    .flip-instruction {
-        position: absolute;
-        bottom: 1rem;
-        width: 100%;
-        text-align: center;
-        color: #666;
-        font-size: 0.9rem;
-    }
-}
-
-/* Landscape mode optimization */
-@media screen and (max-height: 600px) and (orientation: landscape) {
-    .valentine-card {
-        height: 90vh;
-        width: calc(90vh * 0.75);
-    }
-}
-
-/* High DPI screens */
-@media screen and (-webkit-min-device-pixel-ratio: 2),
-       screen and (min-resolution: 192dpi) {
-    .card-front,
-    .card-inside {
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    }
-}
-
-/* Print styles */
-@media print {
-    .valentine-card {
-        transform: none !important;
-        box-shadow: none !important;
-    }
-    
-    .card-inside {
-        position: relative;
-        transform: none;
-    }
-}
+  }
