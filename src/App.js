@@ -1,12 +1,11 @@
 import React from 'react';
-import Card from './components/Card';
+import SorryCard from './components/SorryCard';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <div className="App">
-      <Card />
+      <SorryCard />
     </div>
   );
 }
