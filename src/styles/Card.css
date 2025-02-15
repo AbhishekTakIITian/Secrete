@@ -1,225 +1,195 @@
-/* Root variables for consistent sizing */
 :root {
-    --card-width-xl: 600px;
-    --card-height-xl: 800px;
-    --card-width-lg: 500px;
-    --card-height-lg: 700px;
-    --card-width-md: 400px;
-    --card-height-md: 600px;
-    --card-width-sm: 320px;
-    --card-height-sm: 480px;
-    --primary-color: #ff6b6b;
-    --secondary-color: #ff8e8e;
+    --sorry-primary: #4a90e2;
+    --sorry-secondary: #8ab4e8;
+    --card-width-xl: 500px;
+    --card-height-xl: 700px;
   }
   
-  /* Global Reset */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Background Container */
-  .valentine-bg {
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  .sorry-bg {
+    background: linear-gradient(45deg, var(--sorry-primary), var(--sorry-secondary));
     min-height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: clamp(10px, 3vw, 30px);
+    padding: 20px;
     overflow: hidden;
   }
   
-  /* Card Container */
-  .valentine-card {
-    width: clamp(300px, 90vw, var(--card-width-xl));
-    height: clamp(450px, 80vh, var(--card-height-xl));
+  .sorry-card {
+    width: min(90vw, var(--card-width-xl));
+    height: min(80vh, var(--card-height-xl));
     position: relative;
     transform-style: preserve-3d;
     transition: transform 1s ease;
-    cursor: pointer;
     margin: auto;
   }
   
-  .valentine-card.open {
-    transform: rotateY(180deg);
+  /* Desktop hover effect */
+  @media (min-width: 1024px) {
+    .sorry-card:hover {
+      transform: rotateY(180deg);
+    }
   }
   
-  /* Card Faces */
+  /* Mobile tap effect */
+  @media (max-width: 1023px) {
+    .sorry-card {
+      cursor: pointer;
+    }
+    .sorry-card.open {
+      transform: rotateY(180deg);
+    }
+  }
+  
   .card-front,
   .card-inside {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: clamp(15px, 2vw, 30px);
+    border-radius: 20px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-    padding: clamp(15px, 3vw, 30px);
+    padding: 25px;
     background: white;
     overflow: hidden;
   }
   
-  .card-front {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: white;
-  }
-  
   .card-inside {
     transform: rotateY(180deg);
-    background: #fff9f9;
+    background: #f8f9fa;
     overflow-y: auto;
+    padding: 30px;
   }
   
-  /* Heart Animation */
-  .heart {
-    width: clamp(60px, 15vw, 150px);
-    height: clamp(54px, 13.5vw, 135px);
+  /* Broken Heart Animation */
+  .heart-broken {
+    width: 100px;
+    height: 90px;
     position: relative;
-    margin: clamp(10px, 3vw, 30px) auto;
-    animation: heartbeat 1.5s infinite;
+    margin: 30px auto;
+    animation: heartache 2s infinite;
   }
   
-  .heart:before,
-  .heart:after {
+  .heart-broken:before,
+  .heart-broken:after {
     content: "";
     position: absolute;
-    left: 50%;
-    top: 0;
-    width: 50%;
-    height: 80%;
-    background: var(--primary-color);
+    background: var(--sorry-primary);
+    width: 50px;
+    height: 80px;
     border-radius: 50px 50px 0 0;
-    transform: rotate(-45deg);
-    transform-origin: 0 100%;
   }
   
-  .heart:after {
+  .heart-broken:before {
+    left: 50px;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+    animation: heartbreak-left 1s infinite;
+  }
+  
+  .heart-broken:after {
     left: 0;
     transform: rotate(45deg);
     transform-origin: 100% 100%;
+    animation: heartbreak-right 1s infinite;
   }
   
-  @keyframes heartbeat {
+  @keyframes heartache {
     0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    50% { transform: scale(0.9); }
     100% { transform: scale(1); }
+  }
+  
+  @keyframes heartbreak-left {
+    0% { transform: rotate(-45deg) translateX(0); }
+    50% { transform: rotate(-45deg) translateX(-5px); }
+    100% { transform: rotate(-45deg) translateX(0); }
+  }
+  
+  @keyframes heartbreak-right {
+    0% { transform: rotate(45deg) translateX(0); }
+    50% { transform: rotate(45deg) translateX(5px); }
+    100% { transform: rotate(45deg) translateX(0); }
   }
   
   /* Typography */
   .card-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    color: var(--primary-color);
-    margin-bottom: clamp(0.5rem, 2vw, 1.5rem);
+    font-size: min(2.5rem, 6vw);
+    color: var(--sorry-primary);
+    margin-bottom: 1.5rem;
     text-align: center;
   }
   
   .card-subtitle {
-    font-size: clamp(1.2rem, 3vw, 2rem);
-    margin-bottom: clamp(0.5rem, 2vw, 1.5rem);
-    text-align: center;
+    font-size: min(2rem, 5vw);
+    margin-bottom: 1.5rem;
+    color: #555;
   }
   
   .card-text {
-    font-size: clamp(0.9rem, 2vw, 1.25rem);
+    font-size: min(1.2rem, 4vw);
     line-height: 1.6;
-    margin-bottom: clamp(0.5rem, 2vw, 1rem);
+    margin-bottom: 1rem;
     color: #444;
+  }
+  
+  .promises-list {
+    margin: 1.5rem 0;
+    padding-left: 20px;
+  }
+  
+  .promises-list li {
+    font-size: min(1.1rem, 4vw);
+    margin-bottom: 0.5rem;
+    color: #555;
+  }
+  
+  .highlight {
+    background: #f0f7ff;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid var(--sorry-primary);
+    margin: 1.5rem 0;
   }
   
   .signature {
     font-family: 'Dancing Script', cursive;
-    font-size: clamp(1.2rem, 3vw, 2rem);
-    color: var(--primary-color);
-    margin-top: clamp(1rem, 3vw, 2rem);
+    font-size: min(2rem, 5vw);
+    color: var(--sorry-primary);
+    margin-top: 2rem;
     text-align: right;
   }
   
-  .front-text {
-    font-size: clamp(1.2rem, 3vw, 2rem);
-    text-align: center;
-    color: var(--primary-color);
-    margin-top: clamp(1rem, 3vw, 1.5rem);
-  }
+  /* Additional Sorry Messages */
+  /* Here are some alternative sorry messages you can use:
   
-  .flip-instruction {
-    font-size: clamp(0.8rem, 2vw, 1rem);
-    color: #666;
-    text-align: center;
-    margin-top: clamp(0.5rem, 2vw, 1rem);
-  }
-  
-  /* Scrollbar Styling */
-  .card-inside::-webkit-scrollbar {
-    width: clamp(4px, 1vw, 8px);
-  }
-  
-  .card-inside::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-  }
-  
-  .card-inside::-webkit-scrollbar-thumb {
-    background: var(--secondary-color);
-    border-radius: 10px;
-  }
-  
-  /* Landscape Mode */
-  @media (orientation: landscape) and (max-height: 600px) {
-    .valentine-card {
-      width: min(70vw, var(--card-width-lg));
-      height: 85vh;
-    }
-  }
-  
-  /* Touch Device Optimization */
-  @media (hover: none) {
-    .valentine-card {
-      transition: transform 0.5s ease;
-    }
-  }
-  
-  /* High DPI Screens */
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .card-front,
-    .card-inside {
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    }
-  }
-  
-  /* Safe Area for Notched Phones */
-  @supports (padding: max(0px)) {
-    .valentine-bg {
-      padding: max(20px, env(safe-area-inset-top))
-               max(20px, env(safe-area-inset-right))
-               max(20px, env(safe-area-inset-bottom))
-               max(20px, env(safe-area-inset-left));
-    }
-  }
-  
-  /* Print Styles */
-  @media print {
-    .valentine-card {
-      transform: none !important;
-      box-shadow: none !important;
-    }
-    
-    .card-inside {
-      position: relative;
-      transform: none;
-    }
-  }
-  
-  /* Accessibility */
-  @media (prefers-reduced-motion: reduce) {
-    .valentine-card {
-      transition: none;
-    }
-    
-    .heart {
-      animation: none;
-    }
-  }
+  **Deeply Apologetic:**
+  ```jsx
+  <div className="card-content">
+    <h1 className="card-title">I'm Truly Sorry</h1>
+    <h3 className="card-subtitle">My Beloved [Her Name],</h3>
+    <p className="card-text">
+      The weight of my mistake has been heavy on my heart. I've been replaying 
+      everything in my mind, wishing I could turn back time and undo what I did.
+    </p>
+    <p className="card-text">
+      You've always been there for me, supporting me, loving me, and making my 
+      life beautiful. I took that for granted, and I'm deeply sorry for hurting you.
+    </p>
+    <p className="card-text">
+      I miss:
+      • Your beautiful smile
+      • Our late-night talks
+      • The way you make everything better
+      • Just being close to you
+    </p>
+    <p className="card-text highlight">
+      I promise to work hard to regain your trust and make sure you never doubt 
+      my love for you again. You mean everything to me.
+    </p>
+    <div className="signature">
+      Missing you terribly,<br />
+      [Your Name]
+    </div>
+  </div> */

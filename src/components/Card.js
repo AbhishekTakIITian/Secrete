@@ -1,39 +1,70 @@
-import React, { useState } from 'react';
-import '../styles/Card.css';
+import React, { useState, useEffect } from 'react';
 
-function Card() {
+function SorryCard() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const handleClick = () => {
+    if (isMobile) {
+      setIsOpen(!isOpen);
+    }
+  };
 
   return (
-    <div className="valentine-bg">
-      <div className={`valentine-card ${isOpen ? 'open' : ''}`} 
-           onClick={() => setIsOpen(!isOpen)}>
+    <div className="sorry-bg">
+      <div 
+        className={`sorry-card ${isOpen ? 'open' : ''}`}
+        onClick={handleClick}
+      >
         <div className="card-front">
-          <div className="heart"></div>
-          <h2 className="front-text">Happy Valentine's Day!</h2>
-          <p className="flip-instruction">Click to open ❤️</p>
+          <div className="heart-broken"></div>
+          <h2 className="front-text">I'm Really Sorry...🥹</h2>
+          {isMobile && <p className="flip-instruction">Tap to open ❤️‍🩹</p>}
+          {!isMobile && <p className="flip-instruction">Hover to open ❤️‍🩹</p>}
         </div>
         <div className="card-inside">
           <div className="card-content">
-            <h1 className="card-title">Happy Valentine's Day!</h1>
-            <h3 className="card-subtitle">Dear Manu (Kitty ji),</h3>
+            <h1 className="card-title">I'm Sorry 🥹</h1>
+            <h3 className="card-subtitle">My Dearest Manu,</h3>
             <p className="card-text">
-                Every moment with you feels like a beautiful dream come true.
-                You make my heart skip a beat and bring joy to my life in ways
-                I never thought possible.
+              I know words might not be enough, but my heart aches knowing I've hurt you. 
+              You mean the world to me, and seeing you sad because of my actions breaks my heart.
             </p>
             <p className="card-text">
-              Your smile brightens my darkest days, and your love makes my heart soar.
-              You're not just my valentine, you're my everything.
+              I know mi nit samjl nahi tula, majh chukla ani mi jara vichar nahi kela. 
+              You deserve so much better, and I promise to be more mindful and caring.
+              Tuzya feelings mala saglyat jast important ahet.
             </p>
-            <p className="card-text fw-bold">
-              Will you be my Valentine? 💝
+            <p className="card-text">
+              Apla prem majhyasathi khup precious ahe, ani mala sagl nit karaychay.
+              Mi promise karto ki:
+            </p>
+            <ul className="promises-list">
+              <li>Miss karat jari aslo tri study important</li>
+              <li>Think before I act or speak</li>
+              <li>Mi kiti care karto he pn dakhvat jael</li>
+              <li>Never take you for granted</li>
+            </ul>
+            <p className="card-text highlight">
+              Please give me a chance to make it up to you. You're the best thing 
+              that's ever happened to me, and I can't imagine my life without you.
             </p>
             <div className="signature">
-                With all my love,<br />
-                Always Yours <br/>
-                Rasmalai / Teddy 🧸 <br/>
-                Abhi(Boka)
+              With sincere regret and all my love,<br />
+              Always yours<br />
+              Rasmalai <br/>
+              Abhi(boka) 
             </div>
           </div>
         </div>
@@ -42,4 +73,4 @@ function Card() {
   );
 }
 
-export default Card;
+export default SorryCard;
