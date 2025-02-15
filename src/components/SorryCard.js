@@ -52,9 +52,10 @@ function SorryCard() {
               Apla prem majhyasathi khup precious ahe, ani mala sagl nit karaychay.
               Mi promise karto ki:</p>
               <ul className="promises-list">
+              <li>Mi sagla aikel ani samjun gheil</li>
               <li>Miss karat jari aslo tri study important</li>
               <li>Think before I act or speak</li>
-              <li>Mi kiti care karto he pn dakhvat jael</li>
+              <li>Mi doghanchi kiti care karto he pn dakhvat jael</li>
               <li>Never take you for granted</li>
               </ul>
             </div>
