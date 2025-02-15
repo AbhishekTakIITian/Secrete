@@ -68,7 +68,7 @@ function SorryCard() {
               With sincere regret and all my love,<br />
               Always yours<br />
               Rasmalai <br/>
-              Abhi(boka) 
+              Abhi 🧸
             </div>
           </div>
         </div>
