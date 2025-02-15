@@ -29,7 +29,7 @@ function SorryCard() {
           onClick={handleClick}
         >
           <div className="card-front">
-            <div className="heart-broken"></div>
+            <div className="heart"></div>
             <h2 className="front-text">I'm Really Sorry...🥹</h2>
             {isMobile ? 
               <p className="flip-instruction">Tap to open ❤️‍🩹</p> :
